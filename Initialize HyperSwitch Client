@@ -1,0 +1,5 @@
+const HyperSwitch = require('hyperswitch-sdk'); // hypothetical npm package
+const client = new HyperSwitch({
+    apiKey: process.env.HYPERSWITCH_API_KEY,
+    environment: 'sandbox', // or 'production'
+});
