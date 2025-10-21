@@ -1,0 +1,10 @@
+async function getPaymentStatus(paymentId) {
+    try {
+        const status = await client.payments.get(paymentId);
+        console.log('Payment status:', status);
+    } catch (err) {
+        console.error('Error fetching status:', err);
+    }
+}
+
+getPaymentStatus('payment_12345');
