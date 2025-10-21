@@ -1,0 +1,28 @@
+async function createPayment() {
+    try {
+        const payment = await client.payments.create({
+            amount: 5000, // in smallest currency unit (e.g., paise)
+            currency: 'INR',
+            paymentMethod: {
+                type: 'CARD',
+                card: {
+                    number: '4111111111111111',
+                    expiryMonth: '12',
+                    expiryYear: '2025',
+                    cvv: '123',
+                },
+            },
+            customer: {
+                email: 'customer@example.com',
+                phone: '9999999999',
+            },
+            description: 'Test Payment',
+        });
+
+        console.log('Payment created:', payment);
+    } catch (err) {
+        console.error('Payment failed:', err);
+    }
+}
+
+createPayment();
