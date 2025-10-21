@@ -1,0 +1,31 @@
+const HyperSwitch = require('hyperswitch-sdk');
+const client = new HyperSwitch({
+    apiKey: process.env.HYPERSWITCH_API_KEY,
+    environment: 'sandbox',
+});
+
+// Example batch data
+const batchPayments = [
+    { email: 'user1@example.com', amount: 1000 },
+    { email: 'user2@example.com', amount: 2500 },
+    { email: 'user3@example.com', amount: 500 },
+];
+
+async function processBatchPayments() {
+    for (let paymentData of batchPayments) {
+        try {
+            const payment = await client.payments.create({
+                amount: paymentData.amount,
+                currency: 'INR',
+                paymentMethod: { type: 'CARD' },
+                customer: { email: paymentData.email },
+                description: 'Batch payment processing',
+            });
+            console.log(`Payment for ${paymentData.email} successful:`, payment.id);
+        } catch (err) {
+            console.error(`Payment failed for ${paymentData.email}:`, err.message);
+        }
+    }
+}
+
+processBatchPayments();
