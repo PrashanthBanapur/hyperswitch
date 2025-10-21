@@ -1,0 +1,13 @@
+async function refundPayment(paymentId, amount) {
+    try {
+        const refund = await client.refunds.create({
+            paymentId,
+            amount,
+        });
+        console.log('Refund successful:', refund);
+    } catch (err) {
+        console.error('Refund failed:', err);
+    }
+}
+
+refundPayment('payment_12345', 5000);
